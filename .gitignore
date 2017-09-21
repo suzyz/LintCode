@@ -1,0 +1,7 @@
+
+*.exe
+*.dSYM
+
+*.sublime-project
+*.sublime-workspace
+
