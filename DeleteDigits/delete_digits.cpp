@@ -7,37 +7,25 @@ public:
      */
 
     string DeleteDigits(string &A, int l) {
-    	int count[10];
-    	memset(count,0,sizeof(count));
+    	string res;
+        int n = A.length();
 
-    	for (int i = 0; i < A.length(); ++i)
-    		count[A[i]-'0']++;
+        int st = 0;
+        for (int i = 0; i < n-l; ++i)
+        {
+            int k = st, en = l+i;
 
-    	for (int i = 9; i >=0 && l > 0; --i)
-    	{
-    		if (l >= count[i])
-    		{
-    			l-=count[i];
-    			for (int j = 0; j < A.length(); ++j)
-    			{
-    				if (A[j] == '0'+i)
-    					A.erase(j,1);
-    			}
-    		}
-    		else
-    		{
-    			l = 0;
-    			int sum = 0;
-    			for (int j = 0; j < A.length() && sum < l ; ++j)
-    			{
-    				if (A[j] == '0'+i)
-    				{
-    					A.erase(j,1);
-    					++sum;
-    				}
-    			}
-    		}
-    	}
-    	return A;
+            for (int j = st+1; j <= en; ++j)
+                if (A[j]<A[k])
+                    k = j;
+            
+            res += A[k];
+            st = k+1;
+        }
+
+        while (res.length()>1 && res[0] == '0')
+            res.erase(res.begin());
+
+    	return res;
     }
 };
