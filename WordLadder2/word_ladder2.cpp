@@ -50,7 +50,6 @@ public:
             while (num--)
             {
                 string cur = q[head++];
-                // printf("%d:%s\n",head-1,cur.c_str());
                 
                 for (int i = 0; i < n; ++i)
                 {
