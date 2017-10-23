@@ -5,32 +5,31 @@ public:
      * @return: the nth prime number as description.
      */
 
-	bool cmp(int a,int b)
-	{
-		return a<b;
-	}
     int nthUglyNumber(int n) {
-    	priority_queue<int> q1;
-    	priority_queue<int,vector<int>,greater<int>> q2;
-    	q1.push(1);
-    	q2.push(1);
+        if (n==0)
+            return 0;
 
-    	const int p[3] = {2,3,5};
-    	int idx = 0;
+    	const int primes[3] = {2,3,5};
+        int idx[3],tmp[3];
 
-    	--n;
-    	while(n)
-    	{
-    		int min = q2.top();
-    		for (int i = 0; i < 3; ++i)
-    		{
-    			q1.push(min * p[i]);
-    			q2.push(min * p[i]);
-    			--n;
-    			if (n==0)
-    				break;
-    		}
-    	}
-    	return q1.top();
+        vector<int> nums(1,1);
+
+        idx[0] = idx[1] = idx[2] = 0;
+
+        for (int i = 1; i < n; ++i)
+        {
+            for (int j = 0; j < 3; ++j)
+                tmp[j] = primes[j] * nums[idx[j]];
+        
+            int m = min(tmp[0],min(tmp[1],tmp[2]));
+
+            nums.push_back(m);
+
+            for (int j = 0; j < 3; ++j)
+                if (tmp[j] == m)
+                    ++idx[j];
+        }
+
+        return nums[n-1];
     }
 };
