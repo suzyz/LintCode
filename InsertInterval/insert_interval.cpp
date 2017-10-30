@@ -1,15 +1,17 @@
-/**
- * Definition of Interval:
- * class Interval {
- * public:
- *     int start, end;
- *     Interval(int start, int end) {
- *         this->start = start;
- *         this->end = end;
- *     }
- * }
- */
+#include <iostream>
+#include <cstdio>
+#include <vector>
+using namespace std;
 
+
+ class Interval {
+  public:
+      int start, end;
+      Interval(int start, int end) {
+          this->start = start;
+          this->end = end;
+      }
+  };
 
 class Solution {
 public:
@@ -57,6 +59,7 @@ public:
             intervals.insert(it,Interval(st,en));
             break;
     	}
+
         if (!done)
             intervals.push_back(newInterval);
 
@@ -65,8 +68,24 @@ public:
 
     bool overlapse(const Interval &a,const Interval &b)
     {
-        if (a.end > b.start || b.end > a.start)
+        if (a.end < b.start || b.end < a.start)
             return false;
         return true;
     }
 };
+
+int main(int argc, char const *argv[])
+{
+    Solution s;
+    
+    vector<Interval> v;
+    v.push_back(Interval(1,2));
+    v.push_back(Interval(5,7));
+    vector<Interval> res = s.insert(v,Interval(0,0));
+    printf("res:\n");
+    for (int i = 0; i < res.size(); ++i)
+    {
+        printf("%d %d\n", res[i].start,res[i].end);
+    }
+    return 0;
+}
