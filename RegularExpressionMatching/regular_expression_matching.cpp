@@ -30,7 +30,7 @@ public:
 	    			if (f[i][j])
 	    				continue;
 
-	    			for (int k = i; k > 0 && (p[j-2] == '.' || s[k-1] == p[j-2]); ++k)
+	    			for (int k = i; k > 0 && (p[j-2] == '.' || s[k-1] == p[j-2]); --k)
 	    				if (f[k-1][j-2])
 	    				{
 	    					f[i][j] = true;

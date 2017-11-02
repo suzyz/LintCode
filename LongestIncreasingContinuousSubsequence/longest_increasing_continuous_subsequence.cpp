@@ -1,3 +1,8 @@
+#include <cstdio>
+#include <iostream>
+#include <vector>
+using namespace std;
+
 class Solution {
 public:
     /*
@@ -10,7 +15,7 @@ public:
     		return 0;
     	int ans = 1;
 
-    	for (int diff = -1; diff <= 1; ++diff)
+    	for (int diff = -1; diff <= 1; diff+=2)
     	{
     		int i = diff == 1 ? 0:n-1;
     		while (i+diff < n && i+diff >= 0)
@@ -32,3 +37,12 @@ public:
     	return ans;
     }
 };
+
+int main(int argc, char const *argv[])
+{
+    Solution s;
+    int d[] = {5, 4, 2, 1, 3};
+    vector<int> v(d,d+5);
+    cout<< "res:" << s.longestIncreasingContinuousSubsequence(v) << endl;
+    return 0;
+}
