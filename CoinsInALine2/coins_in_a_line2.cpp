@@ -10,16 +10,20 @@ public:
     		return false;
     	if (n == 1)
     		return (values[0] > 0);
+        
+        reverse(values.begin(), values.end());
 
-    	reverse(values.begin(), values.end());
-    	int sum1 = 0, sum2 = 0, f[n+2];
-    	f[0] = 0;
-    	f[1] = values[0];
-    	for (int i = 2; i <= n; ++i)
-    	{
-    		f[i] = max(sum2 - f[i-1], sum1 - f[i-2] + values[i-2]) + values[i-1];
-    	}
+        int sum[n];
+        sum[0] = values[0];
+        for (int i = 1; i < n; ++i)
+            sum[i] = sum[i-1] + values[i];
     	
-    	return f[n] > 
+    	int f[n];
+        f[0] = values[0];
+        f[1] = values[1] > 0 ? values[0] + values[1] : values[0];
+        for (int i = 2; i < n; ++i)
+            f[i] = sum[i] - min(f[i-1],f[i-2]);
+    	
+    	return f[n-1] > sum[n-1] - f[n-1];
     }
 };
